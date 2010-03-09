@@ -10,7 +10,7 @@ $(document).ready(function() {
 
   // Load existing tasks
   $.ajax({
-    url: '/taskmanager/_design/testcouchapp/_view/alltasks',
+    url: '/taskmanager/_design/taskmanagercouchapp/_view/alltasks',
     type: 'GET',
     success: function(data) {
       result = JSON.parse(data);
