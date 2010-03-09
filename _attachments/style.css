@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  padding: 20px;
+}
+
+#tasklist input {
+  border: 1px solid white;
+  padding-top: 2px;
+  width: 90%;
+}
+
+#tasklist input:focus {
+  border: 1px solid gray;
+}
+
+.delete {
+  font-weight: bold;
+  color: red;
+  width: 20px;
+}
+
+.task {
+  padding: 2px 0;
+}
+
+#taskform {
+  padding: 5px 0 0 20px;
+}
+
+#taskform input {
+  width: 40%;
+}
