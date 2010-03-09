@@ -1,3 +1,6 @@
 This is the "hello world" of applications written as a couchdb app.
 
+currently the url is hardcoded so you'll need to deploy it to the taskmanager db:
+
+couchapp push http://localhost:5984/taskmanager
 
