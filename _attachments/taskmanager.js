@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var create_new_task = function(id, rev, text) {
-    item = $('<div class="task" id="' + id + '"><button class="delete" title="delete">X</button> <input/></div>');
+    item = $('<div class="task" id="' + id + '"><span class="delete" title="delete">X</span> <input/></div>');
     item.find('input').val(text);
     item.data('rev', rev);
     $('#tasklist').append(item);
@@ -48,6 +48,7 @@ $(document).ready(function() {
   
   // remove tasks
   $('#tasklist .delete').live('click', function() {
+    $('#newtask').focus();
     rev = $(this).parent().data('rev');
     curid = $(this).parent().attr('id');
     $(this).parent().remove();
@@ -55,7 +56,6 @@ $(document).ready(function() {
       url: '/taskmanager/' + curid + '?rev=' + rev,
       type: 'DELETE'
     });
-    $('#newtask').focus();
   });
 
   // edit tasks
@@ -74,6 +74,7 @@ $(document).ready(function() {
           $('#' + curid).data('rev', result.rev);
         }
       });
+    $('#newtask').focus();
   });
 
 });
