@@ -1,5 +1,5 @@
 function(doc) {
   if (doc.task) {
-    emit(doc,null);
+    emit([doc.createdAt, doc._id], doc);
   }
 };

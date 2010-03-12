@@ -18,7 +18,7 @@ $(document).ready(function() {
   $.ajax({
     // This is where the view in the views folder is called
     // if your database has a different name than "taskmanager" you'd need to change it here
-    url: '/taskmanager/_design/taskmanagercouchapp/_view/alltasks',
+    url: '/taskmanager/_design/taskmanager/_view/alltasks',
     type: 'GET',
     success: function(data) {
       // The JSON object is available from json2.js
@@ -26,9 +26,9 @@ $(document).ready(function() {
       for (i = 0; i < result.total_rows; i++) {
         // This is the call to the helper function, duh
         create_new_task(
-          result.rows[i].key._id,  
-          result.rows[i].key._rev,
-          result.rows[i].key.task
+          result.rows[i].value._id,  
+          result.rows[i].value._rev,
+          result.rows[i].value.task
         );
       }
     }
