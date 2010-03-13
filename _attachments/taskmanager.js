@@ -2,13 +2,14 @@ $(document).ready(function() {
   
   // This is my little helper function which creates a new task
   // Pass in the tasks id and revision as provided by couchdb
-  var create_new_task = function(id, rev, text) {
+  var create_new_task = function(id, rev, text, createdAt) {
     // jQuery lets me create this task item really easyly, i use an input element so it can be changed later on
     item = $('<div class="task" id="' + id + '"><span class="delete" title="delete">X</span> <input/></div>');
     // By using .val() all the content is properly escaped, so nothing gets injected accidentally
     item.find('input').val(text);
     // Here i use a lesser known feature of jQuery which lets me attach any kind of data to any dom element
     item.data('rev', rev);
+    item.data('createdAt', createdAt);
     // and finally throw it in there!
     $('#tasklist').append(item);
     $('#newtask').focus();
@@ -28,7 +29,8 @@ $(document).ready(function() {
         create_new_task(
           result.rows[i].value._id,  
           result.rows[i].value._rev,
-          result.rows[i].value.task
+          result.rows[i].value.task,
+          result.rows[i].value.createdAt
         );
       }
     }
@@ -53,7 +55,8 @@ $(document).ready(function() {
           create_new_task(
             result.id,
             result.rev,
-            newtask.task
+            newtask.task,
+            timestamp
           );
         }
       });
@@ -86,9 +89,10 @@ $(document).ready(function() {
       text = $(this).val();
       // again, get its id and revision
       rev = $(this).parent().data('rev');
+      timestamp = $(this).parent().data('createdAt');
       curid = $(this).parent().attr('id');
       // create an object to post to the db
-      task = {'_rev': rev, 'task' : text}
+      task = {'_rev': rev, 'task' : text, 'createdAt' : timestamp}
       // again, this uses the couchdb document api directly, the update is done by a http put request
       $.ajax({
         url: '/taskmanager/' + curid,
